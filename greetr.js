@@ -56,6 +56,23 @@
       this.validate();
 
       return this;
+    },
+    HTMLGreeting: function(selector, formal) {
+      if (!$) {
+        throw 'no jQuery found';
+      }
+      if (!selector) {
+        throw 'missing jQury selector';
+      }
+      var msg = 'sasamba';
+      if (formal) {
+        msg = this.formalGreeting();
+      } else {
+        msg = this.greeting();
+      }
+      $(selector).html(msg);
+
+      return this;
     }
   };
   Greetr.init = function(firstName, lastName, language) {
@@ -63,6 +80,7 @@
     self.firstName = firstName || '';
     self.lastName = lastName || '';
     self.language = language || 'en';
+    self.validate();
   };
   Greetr.init.prototype = Greetr.prototype;
   global.g$ = global.Greetr = Greetr;
